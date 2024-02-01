@@ -1,11 +1,13 @@
-export default {
+module.exports = {
   env: {
-    // commonjs: true,
+    commonjs: true,
     es2021: true,
     node: true,
+    jest: true,
   },
-  extends: ['standard', 'prettier'],
+  extends: ['prettier'],
   parserOptions: {
+    sourceType: 'module',
     ecmaVersion: 12,
   },
   rules: {},

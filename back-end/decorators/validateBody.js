@@ -1,5 +1,3 @@
-// import { HttpError } from '../helpers';
-
 import { HttpError } from '../helpers/httpError.js';
 
 export const validateBody = schema => {

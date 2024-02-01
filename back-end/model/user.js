@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { handleMongooseError } from '../helpers/handleMongooseError';
+import { handleMongooseError } from '../helpers/handleMongooseError.js';
 
 const userSchema = new Schema(
   {
@@ -17,18 +17,18 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'Set password for user'],
     },
-    token: {
-      type: String,
-    },
+    // token: {
+    //   type: String,
+    // },
     // avatarUrl: {
     //   type: String,
     //   required: true,
     // },
-    isVerified: {
-      type: Boolean,
-      default: false,
-      required: true,
-    },
+    // isVerified: {
+    //   type: Boolean,
+    //   default: false,
+    //   required: true,
+    // },
     // verificationToken: {
     //   type: String,
     //   required: [true, 'Verify token is required'],
@@ -39,6 +39,4 @@ const userSchema = new Schema(
 
 userSchema.post('save', handleMongooseError);
 
-const User = model('user', userSchema);
-
-export default User;
+export const User = model('user', userSchema);
