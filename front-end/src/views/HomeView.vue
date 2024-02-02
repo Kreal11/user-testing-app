@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import TheWelcome from '../components/TheWelcome.vue'
 </script>
 
@@ -6,4 +6,16 @@ import TheWelcome from '../components/TheWelcome.vue'
   <main>
     <TheWelcome />
   </main>
+</template> -->
+
+<template>
+  <main>
+    <WelcomePage />
+  </main>
 </template>
+<script>
+import WelcomePage from '@/components/WelcomePage.vue'
+
+export default { components: { WelcomePage } }
+</script>
+<style scoped></style>
