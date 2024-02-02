@@ -1,18 +1,36 @@
 import { User } from '../model/user.js';
+import { HttpError } from '../helpers/httpError.js';
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
-  const isExist = await User.findOne({ email, password });
+  const user = await User.findOne({ email, password }).select(
+    'name email _id tests'
+  );
 
-  if (!isExist) {
-    throw httpError(401, `Email or password is wrong`);
+  if (!user) {
+    throw HttpError(401, 'Email or password is wrong');
   }
+
+  // const { _id } = req.user;
+  // const userInfo = await User.aggregate([
+  //   { $match: { _id } },
+  //   {
+  //     $lookup: {
+  //       from: 'tests',
+  //       localField: '_id',
+  //       foreignField: 'owner',
+  //       as: 'tests',
+  //     },
+  //   },
+  // ]);
+  // res.json(userInfo[0]);
 
   res.json({
     user: {
-      name: isExist.name,
-      email: isExist.email,
-      _id: isExist._id,
+      name: user.name,
+      email: user.email,
+      _id: user._id,
+      tests: user.tests,
     },
   });
 };

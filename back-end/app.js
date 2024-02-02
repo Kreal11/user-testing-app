@@ -3,6 +3,9 @@ import session from 'express-session';
 import logger from 'morgan';
 import cors from 'cors';
 import { authRouter } from './routes/api/auth.js';
+import { testsRouter } from './routes/api/tests.js';
+import { authenticate } from './middlewares/authenticate.js';
+import { questionsRouter } from './routes/api/questions.js';
 
 // const { contactsRouter, authRouter } = require('./routes/api');
 
@@ -24,7 +27,8 @@ app.use(express.json());
 app.use(express.static('public'));
 
 app.use('/api/auth', authRouter);
-// app.use('/api/tests');
+app.use('/api/auth/user', testsRouter);
+app.use('/api/auth/user', questionsRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found' });

@@ -1,0 +1,14 @@
+import { Question } from '../model/question.js';
+
+export const listQuestions = async (req, res, next) => {
+  const { _id } = req.test;
+
+  const data = await Question.find({ testOwner: _id }).populate(
+    '_id',
+    'title category'
+  );
+
+  console.log(data);
+
+  res.json({ data });
+};
