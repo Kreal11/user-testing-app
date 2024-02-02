@@ -7,7 +7,7 @@ const questionSchema = new Schema(
       type: String,
       required: [true, 'Set title for question'],
     },
-    validAnswer: {
+    validAnswerId: {
       type: String,
       require: true,
     },
@@ -16,10 +16,20 @@ const questionSchema = new Schema(
       required: true,
       default: false,
     },
+    text: {
+      type: String,
+      required: true,
+    },
     answers: [
       {
-        type: Schema.Types.ObjectId,
-        ref: 'answer',
+        text: {
+          type: String,
+          required: [true, 'Set text for answer'],
+        },
+        answerId: {
+          type: String,
+          required: [true, 'Set id for answer'],
+        },
       },
     ],
     testOwner: {
