@@ -1,6 +1,12 @@
 @import './base.css';
 
 body {
+  background-image: url('./svg/splash.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-position: right;
+  font-family: 'Montserrat';
   display: flex;
   flex-direction: column;
   align-items: center;
