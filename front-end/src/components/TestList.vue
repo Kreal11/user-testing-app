@@ -45,11 +45,9 @@ export default {
     },
     async fetchUserTests() {
       try {
-        const response = await axios.get(
-          `https://user-testing-app.onrender.com/api/auth/user/tests?id=${this.userId}`
-        )
-        console.log(response.data)
-        this.tests = response.data
+        const response = await axios.get(`http://localhost:3000/api/auth/user/tests/${this.userId}`)
+        console.log(response.data.data)
+        this.tests = response.data.data
       } catch (error) {
         console.log('Failed to fetch user tests:', error)
       }
