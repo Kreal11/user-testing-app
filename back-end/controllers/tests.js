@@ -1,9 +1,16 @@
 import { Test } from '../model/test.js';
 
 export const listTests = async (req, res, next) => {
-  const { _id } = req.user;
+  const { id } = req.params;
 
-  const data = await Test.find({ userOwner: _id }).populate('_id', 'email name');
+  // const { _id } = req.user;
+
+  const data = await Test.find({ userOwner: id });
+
+  //   .populate(
+  //   'testOwner',
+  //   'email name'
+  // );
 
   console.log(data);
 

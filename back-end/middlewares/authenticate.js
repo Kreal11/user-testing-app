@@ -2,6 +2,7 @@ import { User } from '../model/user.js';
 
 export const authenticate = async (req, res, next) => {
   const { email } = req.body;
+
   const user = await User.findOne({ email });
 
   if (!user) {
