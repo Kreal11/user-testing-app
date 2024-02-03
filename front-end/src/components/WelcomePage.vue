@@ -2,7 +2,7 @@
   <div class="welcome-page">
     <h1 class="main-header">Welcome on our User Assessment Application!</h1>
 
-    <button class="login-btn" @click="openLoginModal">Sign in</button>
+    <my-button @click="openLoginModal">Sign in</my-button>
 
     <login-modal v-if="showLoginModal" @close="closeLoginModal" @login-success="onLoginSuccess" />
   </div>
@@ -10,6 +10,9 @@
 <script>
 import LoginModal from '@/components/LoginModal.vue'
 export default {
+  components: {
+    'login-modal': LoginModal
+  },
   data() {
     return {
       showLoginModal: false
@@ -22,10 +25,9 @@ export default {
     closeLoginModal() {
       this.showLoginModal = false
     },
-    onLoginSuccess() {}
-  },
-  components: {
-    'login-modal': LoginModal
+    onLoginSuccess() {
+      this.$router.push('/tests')
+    }
   }
 }
 </script>
@@ -39,24 +41,5 @@ export default {
 
 .main-header {
   margin-bottom: 20px;
-}
-
-.login-btn {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.6s;
-
-  &:hover {
-    background-color: aqua;
-  }
-
-  &:active {
-    background-color: darkcyan;
-  }
 }
 </style>
