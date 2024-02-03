@@ -85,9 +85,7 @@ nav a:first-of-type {
 </style> -->
 
 <template>
-  <div>
-    <HomeView />
-  </div>
+  <HomeView />
 </template>
 <script>
 import HomeView from './views/HomeView.vue'

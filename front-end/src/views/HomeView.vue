@@ -9,9 +9,7 @@ import TheWelcome from '../components/TheWelcome.vue'
 </template> -->
 
 <template>
-  <main>
-    <WelcomePage />
-  </main>
+  <WelcomePage />
 </template>
 <script>
 import WelcomePage from '@/components/WelcomePage.vue'
