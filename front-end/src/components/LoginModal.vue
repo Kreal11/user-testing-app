@@ -1,13 +1,13 @@
 <template>
   <div class="modal-overlay" @click="closeModal">
     <div class="modal" @click.stop>
-      <button class="close-btn" @click="closeModal">Close</button>
-      <h2>Log in to see which tests were prepared specially for you!</h2>
+      <h2 class="modal-header">Log in to see which tests were prepared specially for you!</h2>
       <form @submit.prevent="login">
         <label for="email">Email:</label>
         <input type="email" v-model="email" required />
         <label for="password">Password:</label>
         <input type="password" v-model="password" required />
+        <button class="close-btn" @click="closeModal">Close</button>
         <my-button type="submit">Submit</my-button>
       </form>
     </div>
@@ -28,7 +28,7 @@ export default {
     },
     async login() {
       try {
-        const response = await axios.post('https://user-testing-app.onrender.com/api/auth/login', {
+        const response = await axios.post('http://localhost:3000/api/auth/login', {
           email: this.email,
           password: this.password
         })
@@ -50,19 +50,28 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 300px;
   background-color: white;
   color: black;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
+
+/* .modal-header {
+  max-width: 300px;
+} */
 
 .close-btn {
   background-color: white;
