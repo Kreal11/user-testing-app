@@ -1,10 +1,10 @@
 <template>
-  <div class="test-list-wrapper">
-    <h2>Hello, {{ userName }}</h2>
-    <div v-if="tests.length > 0">
-      <h3>Check your knowledge and pass the tests below!</h3>
+  <div class="test-page-wrapper">
+    <h2>Hello, {{ userName }}!</h2>
+    <div v-if="tests.length" class="test-content-wrapper">
+      <h3>Check your knowledge and take the tests below!</h3>
       <div v-for="test in tests" :key="test._id">
-        <TestListItem :title="test.title" :category="test.category" />
+        <TestListItem :testProps="test" />
       </div>
     </div>
     <div v-else>
@@ -55,7 +55,15 @@ export default {
 }
 </script>
 <style scoped>
-.test-list-wrapper {
+.test-page-wrapper {
   padding-left: 60px;
+}
+
+.test-content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
 }
 </style>
