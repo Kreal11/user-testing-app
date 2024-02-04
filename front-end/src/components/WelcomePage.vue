@@ -1,5 +1,5 @@
 <template>
-  <div class="welcome-page">
+  <div class="welcome-page-wrapper">
     <h1 class="main-header">Welcome on our User Assessment Application!</h1>
 
     <my-button @click="openLoginModal">Sign in</my-button>
@@ -32,7 +32,8 @@ export default {
 }
 </script>
 <style scoped>
-.welcome-page {
+.welcome-page-wrapper {
+  padding-left: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;

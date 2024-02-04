@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="test-list-wrapper">
     <h2>Hello, {{ userName }}</h2>
     <div v-if="tests.length > 0">
       <h3>Check your knowledge and pass the tests below!</h3>
@@ -13,8 +13,8 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
 import TestListItem from './TestListItem.vue'
+import { fetchUserTests } from '@/api/apiRequests'
 
 export default {
   components: { TestListItem },
@@ -29,11 +29,11 @@ export default {
     }
   },
   mounted() {
-    this.fetchUserData()
-    this.fetchUserTests()
+    this.getUserData()
+    this.getUserTests()
   },
   methods: {
-    fetchUserData() {
+    getUserData() {
       const userData = JSON.parse(sessionStorage.getItem('userData'))
       const { name, email, _id } = userData.user
       console.log(_id)
@@ -43,11 +43,10 @@ export default {
         this.userId = _id
       }
     },
-    async fetchUserTests() {
+    async getUserTests() {
       try {
-        const response = await axios.get(`http://localhost:3000/api/auth/user/tests/${this.userId}`)
-        console.log(response.data.data)
-        this.tests = response.data.data
+        const response = await fetchUserTests(this.userId)
+        this.tests = response.data
       } catch (error) {
         console.log('Failed to fetch user tests:', error)
       }
@@ -55,4 +54,8 @@ export default {
   }
 }
 </script>
-<style scoped></style>
+<style scoped>
+.test-list-wrapper {
+  padding-left: 60px;
+}
+</style>
