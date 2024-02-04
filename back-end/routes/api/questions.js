@@ -4,4 +4,4 @@ import { getTestQuestions } from '../../middlewares/getTestQuestions.js';
 
 export const questionsRouter = express.Router();
 
-questionsRouter.get('/tests/questions', getTestQuestions, listQuestions);
+questionsRouter.get('/test/:id', listQuestions);
