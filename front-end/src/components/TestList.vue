@@ -1,8 +1,9 @@
 <template>
   <div class="test-page-wrapper">
     <h2>Hello, {{ userName }}!</h2>
+    <h3 class="warning-header">Check your knowledge and take the tests below!</h3>
     <div v-if="tests.length" class="test-content-wrapper">
-      <h3>Check your knowledge and take the tests below!</h3>
+      <h4>Please note that once you complete the test, you will not be able to take it again⚠️</h4>
       <div v-for="test in tests" :key="test._id">
         <TestListItem :testProps="test" />
       </div>
@@ -57,6 +58,10 @@ export default {
 <style scoped>
 .test-page-wrapper {
   padding-left: 60px;
+}
+
+.warning-header {
+  margin-bottom: 20px;
 }
 
 .test-content-wrapper {
