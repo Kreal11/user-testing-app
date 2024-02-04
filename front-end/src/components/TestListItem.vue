@@ -1,18 +1,19 @@
 <template>
   <div class="test">
-    <h4>{{ title }}</h4>
-    <p>{{ category }}</p>
+    <div>
+      <h2 class="test-header">{{ testProps.title }}</h2>
+      <p>{{ testProps.category }}</p>
+      <p v-if="testProps.isEnabled">Available to take⌛</p>
+      <p v-else>Already done✔️</p>
+    </div>
+    <my-button :disabled="!testProps.isEnabled">Start test</my-button>
   </div>
 </template>
 <script>
 export default {
   props: {
-    title: {
-      type: String,
-      required: true
-    },
-    category: {
-      type: String,
+    testProps: {
+      type: Object,
       required: true
     }
   }
@@ -20,10 +21,18 @@ export default {
 </script>
 <style scoped>
 .test {
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: white;
-  border: 1px solid aqua;
-  padding: 30px;
+  border: 1px solid lightblue;
+  padding: 16px;
   border-radius: 5px;
-  background-color: darkcyan;
+  background-color: darkslateblue;
+}
+
+.test-header {
+  text-decoration: underline;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <button class="btn">
+  <button class="btn" :disabled="disabled">
     <slot></slot>
   </button>
 </template>
@@ -18,14 +18,25 @@ export default {
   border-radius: 6px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.6s;
+  transition: background-color 0.4s;
+}
 
-  &:hover {
-    background-color: aqua;
-  }
+.btn:hover:not(:disabled) {
+  background-color: aqua;
+}
 
-  &:active {
-    background-color: darkcyan;
-  }
+.btn:active:not(:disabled) {
+  background-color: darkcyan;
+}
+
+.btn:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn:disabled:hover,
+.btn:disabled:active {
+  background-color: gray;
 }
 </style>
