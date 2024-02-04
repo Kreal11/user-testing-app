@@ -6,15 +6,34 @@
       <p v-if="testProps.isEnabled">Available to take⌛</p>
       <p v-else>Already done✔️</p>
     </div>
-    <my-button :disabled="!testProps.isEnabled">Start test</my-button>
+    <my-button :disabled="!testProps.isEnabled" @click="getTestQuestions">Start test</my-button>
   </div>
 </template>
 <script>
+import { fetchTestQuestions } from '@/api/apiRequests'
+
 export default {
   props: {
     testProps: {
       type: Object,
       required: true
+    }
+  },
+  // data() {
+  //   return {
+  //     disabled: !this.testProps.isEnabled
+  //   }
+  // },
+  methods: {
+    async getTestQuestions() {
+      try {
+        const response = await fetchTestQuestions(this.testProps._id)
+        console.log(response.data)
+
+        this.$router.push(`/test/${this.testProps._id}`)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }
