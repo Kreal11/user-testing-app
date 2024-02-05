@@ -1,11 +1,13 @@
 <template>
-  <input
-    type="radio"
-    :value="answer.answerId"
-    v-model="selectedAnswerId"
-    @change="emitAnswerSelected"
-  />
-  {{ answer.text }}
+  <label>
+    <input
+      type="radio"
+      :value="answer.answerId"
+      v-model="selectedAnswerId"
+      @change="emitAnswerSelected"
+    />
+    {{ answer.text }}
+  </label>
 </template>
 <script>
 export default {
