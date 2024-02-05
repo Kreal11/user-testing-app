@@ -1,8 +1,11 @@
 <template>
-  <div>
-    <input type="radio" :value="answer.answerId" :checked="isSelected" @change="handleChange" />
-    {{ answer.text }}
-  </div>
+  <input
+    type="radio"
+    :value="answer.answerId"
+    v-model="selectedAnswerId"
+    @change="emitAnswerSelected"
+  />
+  {{ answer.text }}
 </template>
 <script>
 export default {
@@ -10,6 +13,17 @@ export default {
     answer: {
       type: Object,
       required: true
+    }
+  },
+  data() {
+    return {
+      selectedAnswerId: null
+    }
+  },
+
+  methods: {
+    emitAnswerSelected() {
+      this.$emit('answerSelected', this.selectedAnswerId)
     }
   }
 }

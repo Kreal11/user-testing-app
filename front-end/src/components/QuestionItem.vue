@@ -3,9 +3,14 @@
     <h3>{{ question.title }}</h3>
     <p>{{ question.category }}</p>
     <p>{{ question.text }}</p>
-    <div>
-      <AnswerItem v-for="answer in question.answers" :key="answer._id" :answer="answer" />
-    </div>
+    <form>
+      <AnswerItem
+        v-for="answer in question.answers"
+        :key="answer._id"
+        :answer="answer"
+        @answerSelected="$emit('answerSelected', answer.answerId, $event)"
+      />
+    </form>
   </div>
 </template>
 <script>
@@ -18,6 +23,12 @@ export default {
     question: {
       type: Object,
       required: true
+    }
+  },
+
+  methods: {
+    emit(event, data) {
+      this.$emit(event, data)
     }
   }
 }
