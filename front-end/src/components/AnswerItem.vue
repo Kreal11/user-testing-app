@@ -1,11 +1,13 @@
 <template>
-  <input
-    type="radio"
-    :value="answer.answerId"
-    v-model="selectedAnswerId"
-    @change="emitAnswerSelected"
-  />
-  {{ answer.text }}
+  <label class="answer-label">
+    <input
+      type="radio"
+      :value="answer.answerId"
+      v-model="selectedAnswerId"
+      @change="emitAnswerSelected"
+    />
+    {{ answer.text }}
+  </label>
 </template>
 <script>
 export default {
@@ -28,4 +30,8 @@ export default {
   }
 }
 </script>
-<style scoped></style>
+<style scoped>
+.answer-label {
+  cursor: pointer;
+}
+</style>
