@@ -1,5 +1,5 @@
 <template>
-  <label>
+  <label class="answer-label">
     <input
       type="radio"
       :value="answer.answerId"
@@ -30,4 +30,8 @@ export default {
   }
 }
 </script>
-<style scoped></style>
+<style scoped>
+.answer-label {
+  cursor: pointer;
+}
+</style>
