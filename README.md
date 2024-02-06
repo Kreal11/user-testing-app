@@ -2,7 +2,7 @@
 
 This website is built using Vue.js and Node.js technologies. It serves as a platform for user authentication and provides access to personalized tests. Each user can log in with their account credentials and access a list of tests assigned specifically to them. Once a test is completed, it becomes unavailable, and the results are displayed on its card.
 
-The backend is hosted locally at `localhost:3000` and at `https://user-testing-app.onrender.com`, while the live website is deployed on Vercel.
+The backend is hosted at `https://user-testing-app.onrender.com` and locally at `localhost:3000`, while the live website is deployed on Vercel.
 
 ### Here are the credentials to log in to the application and view the tests assigned to each user:
 
