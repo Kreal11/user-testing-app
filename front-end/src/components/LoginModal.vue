@@ -38,7 +38,6 @@ export default {
         await loginRequest(this.email, this.password)
 
         this.$emit('login-success')
-        console.log('Login successful')
         this.closeModal()
       } catch (error) {
         console.error('Login failed:', error)

@@ -35,7 +35,6 @@ export const logoutRequest = async () => {
 export const fetchUserTests = async () => {
   try {
     const response = await axiosInstance.get(`/api/auth/user/tests/`)
-    console.log(response)
     return response.data
   } catch (error) {
     console.log(error.message)
