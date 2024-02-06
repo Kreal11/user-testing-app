@@ -4,6 +4,16 @@ This website is built using Vue.js and Node.js technologies. It serves as a plat
 
 The backend is hosted locally at `localhost:3000`, while the live website is deployed on Vercel.
 
+## Here are the credentials to log in to the application and view the tests assigned to each user:
+
+1) First user:
+- Email: "kreal10@gmail.com"
+- Password: "23dadaw97da"
+
+2) Second user:
+- Email: "olena11@gmail.com"
+- Password: "dhjf787fasf"
+
 #### Routes:
 
 - **Home Page**: http://localhost:3000/
