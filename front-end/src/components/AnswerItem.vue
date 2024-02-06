@@ -9,7 +9,10 @@
     {{ answer.text }}
   </label>
 </template>
+
 <script>
+import { ref } from 'vue'
+
 export default {
   props: {
     answer: {
@@ -17,19 +20,22 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      selectedAnswerId: null
-    }
-  },
 
-  methods: {
-    emitAnswerSelected() {
-      this.$emit('answerSelected', this.selectedAnswerId)
+  setup(props, { emit }) {
+    const selectedAnswerId = ref(null)
+
+    const emitAnswerSelected = () => {
+      emit('answerSelected', selectedAnswerId.value)
+    }
+
+    return {
+      selectedAnswerId,
+      emitAnswerSelected
     }
   }
 }
 </script>
+
 <style scoped>
 .answer-label {
   cursor: pointer;
