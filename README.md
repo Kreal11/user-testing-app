@@ -16,13 +16,13 @@ The backend is hosted at `https://user-testing-app.onrender.com` and locally at 
 
 #### Routes:
 
-- **Home Page**: http://localhost:3000/
+- **Home Page**: https://user-testing-app.vercel.app/
   The landing page of the website.
 
-- **User-Specific Test List**: http://localhost:3000/api/auth/user/tests/
+- **User-Specific Test List**: https://user-testing-app.vercel.app/tests
   Displays a list of tests assigned to the logged-in user after registration.
 
-- **Specific Test Details**: http://localhost:3000/api/auth/user/test/:id
+- **Specific Test Details**: https://user-testing-app.vercel.app/test/:id
   Provides details of a specific test, including questions and answer choices.
 
 **Note:** Replace `:id` with the actual ID of the test to view its details.
