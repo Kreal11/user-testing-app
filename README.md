@@ -16,8 +16,12 @@ The backend is hosted at `https://user-testing-app.onrender.com` and or may be h
 
 #### Routes:
 
+Public route:
+
 - **Home Page**: https://user-testing-app.vercel.app/
   The landing page of the website.
+
+Private routes:
 
 - **User-Specific Test List**: https://user-testing-app.vercel.app/tests
   Displays a list of tests assigned to the logged-in user after registration.
