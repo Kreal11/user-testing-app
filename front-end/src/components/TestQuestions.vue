@@ -1,12 +1,13 @@
 <template>
-  <div>
+  <div @click="routeBack" class="questions-wrapper">
+    <my-button class="test-back-btn">Back</my-button>
     <QuestionItem
       v-for="question in testDataStore.testData"
       :key="question._id"
       :question="question"
       @answerSelected="answerSelected({ selectedAnswerId: $event, question: question })"
     />
-    <button @click="handleSubmit">Submit</button>
+    <my-button @click="handleSubmit">Submit</my-button>
   </div>
 </template>
 
@@ -61,7 +62,12 @@ export default {
       updateSelectedAnswers(selectedAnswerId, question)
     }
 
+    const routeBack = () => {
+      router.push('/tests')
+    }
+
     return {
+      routeBack,
       updateTests,
       testDataStore,
       selectedAnswers,
@@ -73,4 +79,12 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.questions-wrapper {
+  margin-left: 30px;
+}
+
+.test-back-btn {
+  margin-bottom: 20px;
+}
+</style>
