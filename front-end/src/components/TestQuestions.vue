@@ -1,6 +1,6 @@
 <template>
-  <div @click="routeBack" class="questions-wrapper">
-    <my-button class="test-back-btn">Back</my-button>
+  <div class="questions-wrapper">
+    <my-button @click="routeBack" class="test-back-btn">Back</my-button>
     <QuestionItem
       v-for="question in testDataStore.testData"
       :key="question._id"
@@ -51,7 +51,6 @@ export default {
       }, 0)
 
       const result = (correctAnswersCount.value / testDataStore.testData.length) * 100
-      console.log(`Your score: ${result}%`)
 
       await updateTests(result)
 
