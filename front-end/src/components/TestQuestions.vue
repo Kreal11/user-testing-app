@@ -14,11 +14,14 @@
 import { onMounted, ref } from 'vue'
 import { useTestDataStore } from '@/stores/testData'
 import QuestionItem from './QuestionItem.vue'
+import { useRouter } from 'vue-router'
+import { fetchUpdatedTests } from '@/api/apiRequests'
 
 export default {
   components: { QuestionItem },
 
   setup() {
+    const router = useRouter()
     const testDataStore = useTestDataStore()
     const selectedAnswers = ref({})
     let correctAnswersCount = ref(0)
@@ -29,19 +32,29 @@ export default {
 
     const updateSelectedAnswers = (selectedAnswerId, question) => {
       selectedAnswers.value[question._id] = selectedAnswerId
-      console.log(selectedAnswers.value)
     }
 
-    const handleSubmit = () => {
+    const updateTests = async (result) => {
+      const testId = router.currentRoute.value.params.id
+      try {
+        await fetchUpdatedTests(testId, result)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    const handleSubmit = async () => {
       correctAnswersCount.value = testDataStore.testData.reduce((count, question) => {
-        console.log(testDataStore.testData)
         const selectedAnswerId = selectedAnswers.value[question._id]
-        console.log(selectedAnswerId, question.validAnswerId)
         return count + (selectedAnswerId === question.validAnswerId ? 1 : 0)
       }, 0)
 
-      const percentage = (correctAnswersCount.value / testDataStore.testData.length) * 100
-      console.log(`Your score: ${percentage}%`)
+      const result = (correctAnswersCount.value / testDataStore.testData.length) * 100
+      console.log(`Your score: ${result}%`)
+
+      await updateTests(result)
+
+      router.push('/tests')
     }
 
     const answerSelected = ({ selectedAnswerId, question }) => {
@@ -49,6 +62,7 @@ export default {
     }
 
     return {
+      updateTests,
       testDataStore,
       selectedAnswers,
       updateSelectedAnswers,

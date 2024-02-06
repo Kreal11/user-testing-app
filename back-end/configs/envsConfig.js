@@ -9,4 +9,5 @@ export const envsConfig = {
   dbHost: DB_HOST,
   email: EMAIL,
   baseUrl: BASE_URL,
+  jwtSecret: JWT_SECRET,
 };

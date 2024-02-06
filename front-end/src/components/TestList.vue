@@ -37,7 +37,6 @@ export default {
     getUserData() {
       const userData = JSON.parse(sessionStorage.getItem('userData'))
       const { name, email, _id } = userData.user
-      console.log(_id)
       if (name && email) {
         this.userEmail = email
         this.userName = name

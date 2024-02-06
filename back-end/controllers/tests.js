@@ -3,16 +3,23 @@ import { Test } from '../model/test.js';
 export const listTests = async (req, res, next) => {
   const { id } = req.params;
 
-  // const { _id } = req.user;
-
   const data = await Test.find({ userOwner: id });
 
-  //   .populate(
-  //   'testOwner',
-  //   'email name'
-  // );
+  res.json({ data });
+};
 
-  console.log(data);
+export const getCompletedTests = async (req, res, next) => {
+  const { id } = req.params;
+  const { result } = req.body;
+
+  const data = await Test.findByIdAndUpdate(
+    id,
+    {
+      isEnabled: false,
+      result: result,
+    },
+    { new: true }
+  );
 
   res.json({ data });
 };
