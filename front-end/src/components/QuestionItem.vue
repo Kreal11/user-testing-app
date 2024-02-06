@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h3>{{ question.title }}</h3>
-    <p>{{ question.category }}</p>
     <p>{{ question.text }}</p>
     <form>
       <AnswerItem
