@@ -35,8 +35,7 @@ export default {
     },
     async login() {
       try {
-        const response = await loginRequest(this.email, this.password)
-        sessionStorage.setItem('userData', JSON.stringify(response))
+        await loginRequest(this.email, this.password)
 
         this.$emit('login-success')
         console.log('Login successful')

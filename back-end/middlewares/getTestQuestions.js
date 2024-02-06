@@ -12,9 +12,6 @@ export const getTestQuestions = async (req, res, next) => {
 
   req.test = {
     _id: test._id,
-    // name: user.name,
-    // email: user.email,
-    // tests: user.tests,
   };
 
   next();

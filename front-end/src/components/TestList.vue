@@ -1,6 +1,7 @@
 <template>
   <div class="test-page-wrapper">
-    <h2>Hello, {{ userName }}!</h2>
+    <my-button v-if="userName" @click="logout" class="logout-btn">Logout</my-button>
+    <h2>Hello {{ userName }}!</h2>
     <h3 class="warning-header">Check your knowledge and take the tests below!</h3>
     <div v-if="tests.length" class="test-content-wrapper">
       <h4>Please note that once you complete the test, you will not be able to take it again⚠️</h4>
@@ -15,48 +16,59 @@
 </template>
 <script>
 import TestListItem from './TestListItem.vue'
-import { fetchUserTests } from '@/api/apiRequests'
+import { fetchUserTests, logoutRequest } from '@/api/apiRequests'
+import { useRouter } from 'vue-router'
+import { onMounted, ref } from 'vue'
 
 export default {
   components: { TestListItem },
 
-  data() {
-    return {
-      userName: '',
-      userEmail: '',
-      userPassword: '',
-      userId: '',
-      tests: []
-    }
-  },
-  mounted() {
-    this.getUserData()
-    this.getUserTests()
-  },
-  methods: {
-    getUserData() {
-      const userData = JSON.parse(sessionStorage.getItem('userData'))
-      const { name, email, _id } = userData.user
-      if (name && email) {
-        this.userEmail = email
-        this.userName = name
-        this.userId = _id
-      }
-    },
-    async getUserTests() {
+  setup() {
+    const router = useRouter()
+
+    const userName = ref('')
+    const tests = ref([])
+
+    const getUserTests = async () => {
       try {
-        const response = await fetchUserTests(this.userId)
-        this.tests = response.data
+        const response = await fetchUserTests()
+        tests.value = response.data
+        userName.value = response.name
       } catch (error) {
         console.log('Failed to fetch user tests:', error)
       }
     }
+
+    const logout = async () => {
+      try {
+        await logoutRequest()
+        router.push('/')
+      } catch (error) {
+        console.log('Failed to logout', error)
+      }
+    }
+
+    onMounted(() => {
+      getUserTests()
+    })
+
+    return { userName, tests, logout }
   }
 }
 </script>
 <style scoped>
 .test-page-wrapper {
   padding-left: 60px;
+}
+
+.logout-btn {
+  &:hover {
+    background-color: lightcoral;
+  }
+
+  &:active {
+    background-color: darkred;
+  }
 }
 
 .warning-header {
