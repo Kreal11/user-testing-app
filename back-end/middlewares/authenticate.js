@@ -1,20 +1,27 @@
 import { User } from '../model/user.js';
+import jwt from 'jsonwebtoken';
+import { envsConfig } from '../configs/envsConfig.js';
+import { HttpError } from '../helpers/httpError.js';
 
 export const authenticate = async (req, res, next) => {
-  const { email } = req.body;
+  const { authorization = '' } = req.headers;
+  const [bearer, token] = authorization.split(' ');
 
-  const user = await User.findOne({ email });
-
-  if (!user) {
-    return res.status(401).json({ message: 'Email or password is wrong' });
+  if (bearer !== 'Bearer') {
+    next(HttpError(401, 'Unauthorized, problem 1'));
   }
 
-  req.user = {
-    _id: user._id,
-    name: user.name,
-    email: user.email,
-    tests: user.tests,
-  };
+  try {
+    const { id } = await jwt.verify(token, envsConfig.jwtSecret);
+    const user = await User.findById(id);
+    if (!token || !user.token || user.token !== token) {
+      next(HttpError(401, 'Unauthorized problem 2'));
+    }
+
+    req.user = user;
+  } catch (error) {
+    next(HttpError(401, 'Unauthorized problem 3'));
+  }
 
   next();
 };

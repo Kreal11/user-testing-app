@@ -1,11 +1,14 @@
 import { Test } from '../model/test.js';
 
 export const listTests = async (req, res, next) => {
-  const { id } = req.params;
+  const { _id, name } = req.user;
 
-  const data = await Test.find({ userOwner: id });
+  const data = await Test.find({ userOwner: _id });
 
-  res.json({ data });
+  res.json({
+    data: data,
+    name,
+  });
 };
 
 export const getCompletedTests = async (req, res, next) => {

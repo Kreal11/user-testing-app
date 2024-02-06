@@ -1,29 +1,19 @@
 import { User } from '../model/user.js';
 import { HttpError } from '../helpers/httpError.js';
+import jsonwebtoken from 'jsonwebtoken';
+import { envsConfig } from '../configs/envsConfig.js';
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email, password }).select(
-    'name email _id tests'
-  );
+  const user = await User.findOne({ email, password });
 
   if (!user) {
     throw HttpError(401, 'Email or password is wrong');
   }
 
-  // const { _id } = req.user;
-  // const userInfo = await User.aggregate([
-  //   { $match: { _id } },
-  //   {
-  //     $lookup: {
-  //       from: 'tests',
-  //       localField: '_id',
-  //       foreignField: 'owner',
-  //       as: 'tests',
-  //     },
-  //   },
-  // ]);
-  // res.json(userInfo[0]);
+  const token = await jsonwebtoken.sign({ id: user._id }, envsConfig.jwtSecret);
+  console.log(token);
+  await User.findByIdAndUpdate(user._id, { token });
 
   res.json({
     user: {
@@ -32,16 +22,14 @@ export const login = async (req, res) => {
       _id: user._id,
       tests: user.tests,
     },
+    token,
   });
 };
 
-export const logout = (req, res) => {
-  req.session.destroy(err => {
-    if (err) {
-      console.error('Error destroying session:', err);
-      return res.status(500).json({ message: 'Internal Server Error' });
-    }
+export const logout = async (req, res) => {
+  const { id } = req.user;
 
-    res.json({ message: 'Logout successful' });
-  });
+  await User.findByIdAndUpdate(id, { token: null });
+
+  res.json({ message: 'Logout successful' });
 };

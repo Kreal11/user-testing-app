@@ -6,5 +6,5 @@ export const testsRouter = express.Router();
 
 testsRouter.use(express.json());
 
-testsRouter.get('/tests/:id', listTests);
+testsRouter.get('/tests', authenticate, listTests);
 testsRouter.patch('/tests/updated/:id', getCompletedTests);
