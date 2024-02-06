@@ -4,10 +4,7 @@ import logger from 'morgan';
 import cors from 'cors';
 import { authRouter } from './routes/api/auth.js';
 import { testsRouter } from './routes/api/tests.js';
-import { authenticate } from './middlewares/authenticate.js';
 import { questionsRouter } from './routes/api/questions.js';
-
-// const { contactsRouter, authRouter } = require('./routes/api');
 
 const app = express();
 

@@ -4,14 +4,15 @@
       <h2 class="test-header">{{ testProps.title }}</h2>
       <p>{{ testProps.category }}</p>
       <p v-if="testProps.isEnabled">Available to take⌛</p>
-      <p v-else>Already done✔️</p>
+      <p v-else class="test-status">
+        Already done✔️ <span>Your result: {{ testProps.result }}% from 100%</span>
+      </p>
     </div>
-    <my-button :disabled="enabled" @click="getTestQuestions">Start test</my-button>
+    <my-button :disabled="!testProps.isEnabled" @click="getTestQuestions">Start test</my-button>
   </div>
 </template>
 <script>
 import { fetchTestQuestions } from '@/api/apiRequests'
-import { ref } from 'vue'
 import { useTestDataStore } from '@/stores/testData'
 import { useRouter } from 'vue-router'
 
@@ -26,13 +27,11 @@ export default {
   setup(props) {
     const router = useRouter()
     const testDataStore = useTestDataStore()
-    const enabled = ref(!testDataStore.isEnabled)
 
     const getTestQuestions = async () => {
       try {
         const response = await fetchTestQuestions(props.testProps._id)
         testDataStore.setTestData(response.data)
-        console.log(response.data)
 
         router.push(`/test/${response.data[0].testOwner}`)
       } catch (error) {
@@ -40,13 +39,13 @@ export default {
       }
     }
 
-    return { enabled, getTestQuestions }
+    return { getTestQuestions }
   }
 }
 </script>
 <style scoped>
 .test {
-  width: 250px;
+  width: 300px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -59,5 +58,10 @@ export default {
 
 .test-header {
   text-decoration: underline;
+}
+
+.test-status {
+  display: flex;
+  flex-direction: column;
 }
 </style>

@@ -25,6 +25,14 @@ export const fetchUserTests = async (userId) => {
     console.log(error.message)
   }
 }
+export const fetchUpdatedTests = async (id, result) => {
+  try {
+    const response = await axiosInstance.patch(`/api/auth/user/tests/updated/${id}`, { result })
+    return response.data
+  } catch (error) {
+    console.log(error.message)
+  }
+}
 
 export const fetchTestQuestions = async (id) => {
   try {

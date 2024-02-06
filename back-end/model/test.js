@@ -18,6 +18,11 @@ const testSchema = new Schema(
     },
     userOwner: {
       type: String,
+      required: [true, 'Set userOwnerId for test'],
+    },
+    result: {
+      type: String,
+      required: [true, 'Set result for test'],
     },
   },
   { versionKey: false, timestamps: true }
