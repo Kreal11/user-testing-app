@@ -7,30 +7,38 @@
     <login-modal v-if="showLoginModal" @close="closeLoginModal" @login-success="onLoginSuccess" />
   </div>
 </template>
+
 <script>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import LoginModal from '@/components/LoginModal.vue'
+
 export default {
   components: {
     'login-modal': LoginModal
   },
-  data() {
-    return {
-      showLoginModal: false
+  setup() {
+    const showLoginModal = ref(false)
+    const router = useRouter()
+
+    const openLoginModal = () => {
+      showLoginModal.value = true
     }
-  },
-  methods: {
-    openLoginModal() {
-      this.showLoginModal = true
-    },
-    closeLoginModal() {
-      this.showLoginModal = false
-    },
-    onLoginSuccess() {
-      this.$router.push('/tests')
+
+    const closeLoginModal = () => {
+      showLoginModal.value = false
     }
+
+    const onLoginSuccess = () => {
+      router.push('/tests')
+      console.log('Login success!')
+    }
+
+    return { showLoginModal, openLoginModal, closeLoginModal, onLoginSuccess }
   }
 }
 </script>
+
 <style scoped>
 .welcome-page-wrapper {
   padding-left: 60px;

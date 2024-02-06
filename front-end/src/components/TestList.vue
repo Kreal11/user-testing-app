@@ -1,7 +1,7 @@
 <template>
   <div class="test-page-wrapper">
     <my-button v-if="userName" @click="logout" class="logout-btn">Logout</my-button>
-    <h2>Hello {{ userName }}!</h2>
+    <h2 v-if="userName">Hello, {{ userName }}!</h2>
     <h3 class="warning-header">Check your knowledge and take the tests below!</h3>
     <div v-if="tests.length" class="test-content-wrapper">
       <h4>Please note that once you complete the test, you will not be able to take it again⚠️</h4>
