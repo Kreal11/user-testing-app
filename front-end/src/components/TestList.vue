@@ -69,6 +69,8 @@ export default {
   &:active {
     background-color: darkred;
   }
+
+  margin-bottom: 20px;
 }
 
 .warning-header {

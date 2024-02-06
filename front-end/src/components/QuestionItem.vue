@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <p>{{ question.text }}</p>
-    <form>
+  <div class="question-wrapper">
+    <p class="question-text">{{ question.text }}</p>
+    <form class="answers-wrapper">
       <AnswerItem
         v-for="answer in question.answers"
         :key="answer._id"
@@ -31,4 +31,16 @@ export default {
   }
 }
 </script>
-<style scoped></style>
+<style scoped>
+.question-wrapper {
+  margin-bottom: 20px;
+}
+.answers-wrapper {
+  display: flex;
+  gap: 15px;
+}
+
+.question-text {
+  margin-bottom: 5px;
+}
+</style>
