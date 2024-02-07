@@ -11,7 +11,7 @@ Technologies:
 ![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white)
 
 
-This website is built using Vue.js and Node.js technologies. It serves as a platform for user authentication and provides access to personalized tests. Users can log in with their account credentials and access a list of tests assigned to them. Once a test is completed, it becomes unavailable, and the results are displayed on its card.
+This website serves as a platform for user authentication and provides access to personalized tests. Users can log in with their account credentials and access a list of tests assigned to them. Once a test is completed, it becomes unavailable, and the results are displayed on its card.
 
 The backend is hosted at `https://user-testing-app.onrender.com` and may be hosted locally at `localhost:3000`, while the live website is deployed on Vercel.
 
